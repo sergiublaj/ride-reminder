@@ -1,0 +1,4 @@
+{
+	"mongoURI": "mongodb+srv://sergiumr:admin@ridereminder.pwv8r.mongodb.net/ride-reminder?retryWrites=true&w=majority",
+	"jwtSecret": "secret"
+}
