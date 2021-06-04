@@ -5,3 +5,9 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 } from "../actions/types";
+
+export const loadUser = async () => {
+	if (localStorage.token) {
+		setAuthToken;
+	}
+};
