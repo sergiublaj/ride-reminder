@@ -8,6 +8,8 @@ import RideItem from "./RideItem";
 function RideList({ ride: { rides, loading }, getRides }) {
 	useEffect(() => {
 		getRides();
+
+		// eslint-disable-next-line
 	}, []);
 
 	if (loading || rides === null) {

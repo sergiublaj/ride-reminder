@@ -1,62 +1,79 @@
-import React, {Fragment, useState} from "react";
+import React, { Fragment, useState } from "react";
+import { useHistory } from "react-router-dom";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
+import { loginUser } from "../../actions/authActions";
+import { connect } from "react-redux";
 
-function Login() {
-   const [user, setUser] = useState({
-      email: "",
-      password: ""
-   });
+function Login({ loginUser }) {
+	const [user, setUser] = useState({
+		email: "",
+		password: "",
+	});
+	const history = useHistory();
+	const { email, password } = user;
 
-   const {email, password} = user;
+	const onSubmit = (event) => {
+		event.preventDefault();
+		if (email === "" || password === "") {
+			M.toast({ html: "Please enter an email and a password!" });
+		} else {
+			loginUser({ email, password });
+			history.push("/");
+		}
+	};
 
-   const onSubmit = (event) => {
-      event.preventDefault();
-      if (email === "" || password === "") {
-         M.toast({html: "Please enter an email and a password!"});
-      } else {
-         M.toast({html: `${email} and ${password}`});
+	const onChange = (event) => {
+		const { name, value } = event.target;
+		setUser({
+			...user,
+			[name]: value,
+		});
+	};
 
-         setUser({email: "", password: ""});
-      }
-   };
+	return (
+		<Fragment>
+			<form className={"row s2"} onSubmit={onSubmit}>
+				<div className={"row"}>
+					<h4 className={"center-align"}>Log in</h4>
+				</div>
 
-   const onChange = (event) => {
-      const {name, value} = event.target;
-      setUser({
-         ...user,
-         [name]: value
-      });
-   };
+				<div className="row">
+					<div className="input-field col s6 offset-l3">
+						<input
+							className="validate"
+							type="text"
+							name="email"
+							value={email}
+							onChange={onChange}
+						/>
+						<label htmlFor="email">Email</label>
+					</div>
+				</div>
 
-   return (
-      <Fragment>
-         <form className={"row s2"} onSubmit={onSubmit}>
-            <div className={"row"}>
-               <h4 className={"center-align"}>
-                  Log in
-               </h4>
-            </div>
+				<div className="row">
+					<div className="input-field col s6 offset-l3">
+						<input
+							className="validate"
+							type="password"
+							name="password"
+							value={password}
+							onChange={onChange}
+						/>
+						<label htmlFor="password">Password</label>
+					</div>
+				</div>
 
-            <div className="row">
-               <div className="input-field col s6 offset-l3">
-                  <input className="validate" type="text" name="email" value={email} onChange={onChange}/>
-                  <label htmlFor="email">Email</label>
-               </div>
-            </div>
-
-            <div className="row">
-               <div className="input-field col s6 offset-l3">
-                  <input className="validate" type="password" name="password" value={password} onChange={onChange}/>
-                  <label htmlFor="password">Password</label>
-               </div>
-            </div>
-
-            <button className="waves-effect waves-light btn-large btn-block btn-primary offset-l3 col s6">
-               Log in
-            </button>
-         </form>
-      </Fragment>
-   );
+				<button className="waves-effect waves-light btn-large btn-block btn-primary offset-l3 col s6">
+					Log in
+				</button>
+			</form>
+		</Fragment>
+	);
 }
 
-export default Login;
+Login.propTypes = {
+	loginUser: PropTypes.func.isRequired,
+};
+
+export default connect(null, { loginUser })(Login);

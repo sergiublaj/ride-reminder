@@ -1,4 +1,5 @@
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 import {
 	USER_LOADED,
 	AUTH_ERROR,
@@ -6,7 +7,8 @@ import {
 	LOGIN_FAIL,
 } from "../actions/types";
 
-export const loadUser = async () => {
+// eslint-disable-next-line
+export const loadUser = () => async (dispatch) => {
 	if (localStorage.token) {
 		setAuthToken(localStorage.token);
 	}
@@ -26,7 +28,8 @@ export const loadUser = async () => {
 	}
 };
 
-export const loginUser = async (formData) => {
+// eslint-disable-next-line
+export const loginUser = (formData) => async (dispatch) => {
 	const config = {
 		headers: {
 			"Content-Type": "application/json",
