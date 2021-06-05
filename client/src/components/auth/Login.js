@@ -1,16 +1,27 @@
-import React, { Fragment, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
 import { loginUser } from "../../actions/authActions";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
-function Login({ loginUser }) {
+function Login({ initialState: { isAuthenticated, error }, loginUser }) {
+	const history = useHistory();
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			history.push("/");
+		}
+
+		if (error === "Invalid credentials") {
+			M.toast({ html: error });
+		}
+	}, [history, isAuthenticated, error]);
+
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
 	});
-	const history = useHistory();
 	const { email, password } = user;
 
 	const onSubmit = (event) => {
@@ -19,7 +30,6 @@ function Login({ loginUser }) {
 			M.toast({ html: "Please enter an email and a password!" });
 		} else {
 			loginUser({ email, password });
-			history.push("/");
 		}
 	};
 
@@ -76,4 +86,8 @@ Login.propTypes = {
 	loginUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { loginUser })(Login);
+const mapStateToProps = (state) => ({
+	initialState: state.auth,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

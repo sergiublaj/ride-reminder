@@ -11,7 +11,7 @@ const Ride = require("../models/Ride");
 router.get("/", auth, async (req, res) => {
 	try {
 		const rides = await Ride.find({ user: req.user.id }).sort({ date: -1 });
-		res.json({ rides });
+		res.json(rides);
 	} catch (error) {
 		console.error(error.message);
 		res.status(500).send("Server error");

@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
 import { getRides } from "../../actions/rideActions";
 import PropTypes from "prop-types";
@@ -12,7 +13,7 @@ function RideList({ ride: { rides, loading }, getRides }) {
 		// eslint-disable-next-line
 	}, []);
 
-	if (loading || rides === null) {
+	if (loading) {
 		return <Spinner />;
 	}
 
@@ -20,20 +21,17 @@ function RideList({ ride: { rides, loading }, getRides }) {
 		<Fragment>
 			<h4 className={"center-align"}>Your rides</h4>
 			<br />
-			{rides.length === 0 ? (
+			{!rides || (rides && rides.length === 0) ? (
 				<h5>You haven't added any rides.</h5>
 			) : (
-				<Fragment>
+				<TransitionGroup>
 					<h5>Rides to complete:</h5>
-					<ul>
-						{" "}
-						{rides.map((ride) => (
-							<li key={ride.id}>
-								<RideItem ride={ride} />
-							</li>
-						))}{" "}
-					</ul>
-				</Fragment>
+					{rides.map((ride) => (
+						<CSSTransition key={ride.id} timeout={300} classNames="item">
+							<RideItem ride={ride} />
+						</CSSTransition>
+					))}
+				</TransitionGroup>
 			)}
 		</Fragment>
 	);

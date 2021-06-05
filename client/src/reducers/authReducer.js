@@ -3,11 +3,12 @@ import {
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
+	LOGOUT,
 } from "../actions/types";
 
 const initialState = {
 	token: localStorage.getItem("token"),
-	isAuthenticated: null,
+	isAuthenticated: false,
 	loading: false,
 	user: null,
 	error: null,
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
 			};
 		case AUTH_ERROR:
 		case LOGIN_FAIL:
+		case LOGOUT:
 			localStorage.removeItem("token");
 			return {
 				...state,
@@ -38,7 +40,7 @@ export default (state = initialState, action) => {
 			localStorage.setItem("token", action.payload.token);
 			return {
 				...state,
-				token: action.payloadtoken,
+				token: action.payload,
 				isAuthenticated: true,
 				loading: false,
 				user: action.payload,

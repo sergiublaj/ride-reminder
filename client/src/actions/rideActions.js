@@ -15,7 +15,7 @@ export const getRides = () => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: RIDES_ERROR,
-			payload: error.response.msg,
+			payload: error,
 		});
 	}
 };
