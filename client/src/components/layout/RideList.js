@@ -24,14 +24,16 @@ function RideList({ ride: { rides, loading }, getRides }) {
 			{!rides || (rides && rides.length === 0) ? (
 				<h5>You haven't added any rides.</h5>
 			) : (
-				<TransitionGroup>
+				<Fragment>
 					<h5>Rides to complete:</h5>
-					{rides.map((ride) => (
-						<CSSTransition key={ride.id} timeout={300} classNames="item">
-							<RideItem ride={ride} />
-						</CSSTransition>
-					))}
-				</TransitionGroup>
+					<TransitionGroup>
+						{rides.map((ride, index) => (
+							<CSSTransition key={index} timeout={300} classNames="item">
+								<RideItem ride={ride} id={index + 1} />
+							</CSSTransition>
+						))}
+					</TransitionGroup>
+				</Fragment>
 			)}
 		</Fragment>
 	);

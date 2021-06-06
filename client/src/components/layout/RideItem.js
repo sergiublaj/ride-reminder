@@ -1,8 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
 
-// trebe id de pus frumos in db, max(id) + 1
-function RideItem({ ride: { id, start, end, distance, date } }) {
+function RideItem({ ride: { start, end, distance, date }, id }) {
 	return (
 		<div className="card">
 			<i className={"fas fa-biking fa-2x"} />{" "}
