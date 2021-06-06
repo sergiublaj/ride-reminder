@@ -7,9 +7,6 @@ function Navbar({ initialState: { user, isAuthenticated }, logoutUser }) {
 	const guestLinks = (
 		<Fragment>
 			<li>
-				<Link to="/">Home</Link>
-			</li>
-			<li>
 				<Link to="/login">Login</Link>
 			</li>
 			<li>
