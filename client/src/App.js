@@ -1,7 +1,8 @@
 import { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import { store, persistor } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -22,20 +23,22 @@ function App() {
 
 	return (
 		<Provider store={store}>
-			<Router>
-				<Fragment>
-					<Navbar />
-					<div className={"container"}>
-						<Switch>
-							<PrivateRoute exact path="/" component={Home} />
-							<Route exact path="/login" component={Login} />
-							<Route exact path="/register" component={Register} />
-							<Route exact path="/about" component={About} />
-							<Route component={NotFound} />
-						</Switch>
-					</div>
-				</Fragment>
-			</Router>
+			<PersistGate loading={null} persistor={persistor}>
+				<Router>
+					<Fragment>
+						<Navbar />
+						<div className={"container"}>
+							<Switch>
+								<PrivateRoute exact path="/" component={Home} />
+								<Route exact path="/login" component={Login} />
+								<Route exact path="/register" component={Register} />
+								<Route exact path="/about" component={About} />
+								<Route component={NotFound} />
+							</Switch>
+						</div>
+					</Fragment>
+				</Router>
+			</PersistGate>
 		</Provider>
 	);
 }
