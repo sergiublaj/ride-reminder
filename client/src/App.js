@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import { loadUser } from "./actions/authActions";
 import { connect } from "react-redux";
-import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 import "./App.css";
 
@@ -16,7 +15,6 @@ import Register from "./components/auth/Register";
 
 function App({ loadUser }) {
 	useEffect(() => {
-		M.AutoInit();
 		loadUser();
 
 		// eslint-disable-next-line
