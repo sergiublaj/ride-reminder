@@ -1,4 +1,9 @@
-import { GET_RIDES, SET_LOADING, RIDES_ERROR } from "../actions/types";
+import {
+	GET_RIDES,
+	ADD_RIDE,
+	SET_LOADING,
+	RIDES_ERROR,
+} from "../actions/types";
 
 const initialState = {
 	rides: null,
@@ -10,6 +15,11 @@ const initialState = {
 // eslint-disable-next-line
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case ADD_RIDE:
+			return {
+				...state,
+				rides: [action.payload, ...state.rides],
+			};
 		case GET_RIDES:
 			return {
 				...state,

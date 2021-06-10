@@ -37,14 +37,14 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { start, end, distance, date } = req.body;
+		const { start, end, distance } = req.body;
 
 		try {
 			const newRide = new Ride({
 				start,
 				end,
 				distance,
-				date,
+				date: new Date(),
 				user: req.user.id,
 			});
 
