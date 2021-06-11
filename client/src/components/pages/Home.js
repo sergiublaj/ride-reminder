@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
-import RideList from "../layout/RideList";
+import RideList from "../rides/RideList";
 import AddRideButton from "../layout/AddRideButton";
-import AddRideModal from "../rides/AddRideModal";
-import EditRideModal from "../rides/EditRideModal";
-import RemoveRideModal from "../rides/RemoveRideModal";
+import AddRideModal from "../ride-modals/AddRideModal";
+import EditRideModal from "../ride-modals/EditRideModal";
+import RemoveRideModal from "../ride-modals/RemoveRideModal";
 
 function Home() {
 	useEffect(() => {

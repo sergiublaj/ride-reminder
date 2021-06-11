@@ -1,6 +1,9 @@
 import {
 	GET_RIDES,
 	ADD_RIDE,
+	DELETE_RIDE,
+	SET_CURRENT,
+	CLEAR_CURRENT,
 	SET_LOADING,
 	RIDES_ERROR,
 } from "../actions/types";
@@ -15,16 +18,31 @@ const initialState = {
 // eslint-disable-next-line
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case ADD_RIDE:
-			return {
-				...state,
-				rides: [action.payload, ...state.rides],
-			};
 		case GET_RIDES:
 			return {
 				...state,
 				rides: action.payload,
 				loading: false,
+			};
+		case ADD_RIDE:
+			return {
+				...state,
+				rides: [action.payload, ...state.rides],
+			};
+		case DELETE_RIDE:
+			return {
+				...state,
+				rides: state.rides.filter((ride) => ride._id !== action.payload),
+			};
+		case SET_CURRENT:
+			return {
+				...state,
+				current: action.payload,
+			};
+		case CLEAR_CURRENT:
+			return {
+				...state,
+				current: null,
 			};
 		case SET_LOADING:
 			return {
@@ -32,7 +50,6 @@ export default (state = initialState, action) => {
 				loading: true,
 			};
 		case RIDES_ERROR:
-			console.error(action.payload);
 			return {
 				...state,
 				error: action.payload,

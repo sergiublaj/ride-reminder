@@ -1,7 +1,15 @@
 import React from "react";
 import Moment from "react-moment";
+import { setCurrent } from "../../actions/rideActions";
+import { connect } from "react-redux";
 
-function RideItem({ ride: { start, end, distance, date }, id }) {
+function RideItem({ ride, id, setCurrent }) {
+	const onClick = () => {
+		setCurrent(ride);
+	};
+
+	const { start, end, distance, date } = ride;
+
 	return (
 		<div className="card">
 			<i className={"fas fa-biking fa-2x"} />{" "}
@@ -29,14 +37,19 @@ function RideItem({ ride: { start, end, distance, date }, id }) {
 			<a
 				href="#remove-ride-modal"
 				className={"modal-trigger secondary-content"}
+				onClick={onClick}
 			>
 				<i className={"material-icons"}>delete</i>
 			</a>
-			<a href="#edit-ride-modal" className={"modal-trigger secondary-content"}>
+			<a
+				href="#edit-ride-modal"
+				className={"modal-trigger secondary-content"}
+				onClick={onClick}
+			>
 				<i className={"material-icons"}>edit</i>
 			</a>
 		</div>
 	);
 }
 
-export default RideItem;
+export default connect(null, { setCurrent })(RideItem);

@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
 import { getRides } from "../../actions/rideActions";
 import PropTypes from "prop-types";
-import Spinner from "./Spinner";
+import Preloader from "../layout/Preloader";
 import RideItem from "./RideItem";
 
 function RideList({ ride: { rides, loading }, getRides }) {
@@ -14,7 +14,7 @@ function RideList({ ride: { rides, loading }, getRides }) {
 	}, []);
 
 	if (loading) {
-		return <Spinner />;
+		return <Preloader />;
 	}
 
 	return (
@@ -28,7 +28,7 @@ function RideList({ ride: { rides, loading }, getRides }) {
 					<h5>Rides to complete:</h5>
 					<TransitionGroup>
 						{rides.map((ride, index) => (
-							<CSSTransition key={index} timeout={300} classNames="item">
+							<CSSTransition key={index} timeout={300} className="item">
 								<RideItem ride={ride} id={index + 1} />
 							</CSSTransition>
 						))}
