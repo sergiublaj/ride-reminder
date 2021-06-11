@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import { connect } from "react-redux";
+import { updateRide } from "../../actions/rideActions";
 
-function EditRideModal({ current }) {
+function EditRideModal({ initialState: { current }, updateRide }) {
 	const [ride, setRide] = useState({
 		start: "",
 		end: "",
 		distance: "",
 	});
+
+	useEffect(() => {
+		if (current) {
+			setRide(current);
+		}
+		M.updateTextFields();
+	}, [current]);
+
 	const { start, end, distance } = ride;
 
 	const swapLocations = () => {
@@ -35,12 +45,8 @@ function EditRideModal({ current }) {
 		if (start === "" || end === "" || distance === "") {
 			M.toast({ html: "Please fill in all the fields!" });
 		} else {
-			M.toast({ html: `${start}, ${end}, ${distance}, ok` });
-			setRide({
-				start: "",
-				end: "",
-				distance: "",
-			});
+			updateRide(ride);
+			M.toast({ html: "Ride updated successfully!" });
 		}
 	};
 
@@ -94,8 +100,8 @@ function EditRideModal({ current }) {
 									id="distance"
 									className="validate"
 									type="number"
-									min={0}
-									max={100}
+									min={1}
+									max={1000}
 									name="distance"
 									value={distance}
 									onChange={onChange}
@@ -122,4 +128,8 @@ function EditRideModal({ current }) {
 	);
 }
 
-export default EditRideModal;
+const mapStateToProps = (state) => ({
+	initialState: state.ride,
+});
+
+export default connect(mapStateToProps, { updateRide })(EditRideModal);

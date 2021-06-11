@@ -28,7 +28,7 @@ function RideList({ ride: { rides, loading }, getRides }) {
 					<h5>Rides to complete:</h5>
 					<TransitionGroup>
 						{rides.map((ride, index) => (
-							<CSSTransition key={index} timeout={300} className="item">
+							<CSSTransition key={index} timeout={500} classNames="item">
 								<RideItem ride={ride} id={index + 1} />
 							</CSSTransition>
 						))}

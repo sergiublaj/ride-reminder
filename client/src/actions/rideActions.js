@@ -7,6 +7,7 @@ import {
 	CLEAR_CURRENT,
 	SET_LOADING,
 	RIDES_ERROR,
+	UPDATE_RIDE,
 } from "./types";
 
 export const getRides = () => async (dispatch) => {
@@ -58,6 +59,31 @@ export const deleteRide = (id) => async (dispatch) => {
 		dispatch({
 			type: DELETE_RIDE,
 			payload: id,
+		});
+	} catch (error) {
+		dispatch({
+			type: RIDES_ERROR,
+			payload: error,
+		});
+	}
+};
+
+export const updateRide = (ride) => async (dispatch) => {
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	try {
+		dispatch(setLoading());
+
+		const res = await axios.put(`/api/rides/${ride._id}`, ride, config);
+		const data = res.data;
+
+		dispatch({
+			type: UPDATE_RIDE,
+			payload: data,
 		});
 	} catch (error) {
 		dispatch({

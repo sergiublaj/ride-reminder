@@ -6,6 +6,7 @@ import {
 	CLEAR_CURRENT,
 	SET_LOADING,
 	RIDES_ERROR,
+	UPDATE_RIDE,
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +29,14 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				rides: [action.payload, ...state.rides],
+			};
+		case UPDATE_RIDE:
+			return {
+				...state,
+				rides: state.rides.map((ride) =>
+					ride._id === action.payload._id ? action.payload : ride
+				),
+				loading: false,
 			};
 		case DELETE_RIDE:
 			return {

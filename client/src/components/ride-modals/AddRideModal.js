@@ -100,8 +100,8 @@ function AddRideModal({ addRide }) {
 									id="distance"
 									className="validate"
 									type="number"
-									min={0}
-									max={100}
+									min={1}
+									max={1000}
 									name="distance"
 									value={distance}
 									onChange={onChange}
