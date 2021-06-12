@@ -12,7 +12,7 @@ function Login({ initialState: { isAuthenticated, error }, loginUser }) {
 		if (isAuthenticated) {
 			history.push("/");
 		}
-		console.log("error :>> ", error);
+
 		if (
 			error === "Please enter a valid email" ||
 			error === "User not registered" ||

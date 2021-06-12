@@ -63,6 +63,7 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 								<input
 									id="starting_location"
 									className="validate"
+									placeholder=" "
 									type="text"
 									name="start"
 									value={start}
@@ -84,6 +85,7 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 								<input
 									id="ending_location"
 									className="validate"
+									placeholder=" "
 									type="text"
 									name="end"
 									value={end}
@@ -99,6 +101,7 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 								<input
 									id="distance"
 									className="validate"
+									placeholder=" "
 									type="number"
 									min={1}
 									max={1000}
