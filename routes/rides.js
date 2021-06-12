@@ -41,8 +41,8 @@ router.post(
 
 		try {
 			const newRide = new Ride({
-				start,
-				end,
+				start: start.charAt(0).toUpperCase() + start.substring(1),
+				end: end.charAt(0).toUpperCase() + end.substring(1),
 				distance,
 				date: new Date(),
 				user: req.user.id,
@@ -65,8 +65,9 @@ router.put("/:id", auth, async (req, res) => {
 	const { start, end, distance } = req.body;
 
 	const rideFields = {};
-	if (start) rideFields.start = start;
-	if (end) rideFields.end = end;
+	if (start)
+		rideFields.start = start.charAt(0).toUpperCase() + start.substring(1);
+	if (end) rideFields.end = end.charAt(0).toUpperCase() + end.substring(1);
 	if (distance) rideFields.distance = distance;
 
 	try {

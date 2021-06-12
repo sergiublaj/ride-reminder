@@ -12,8 +12,12 @@ function Login({ initialState: { isAuthenticated, error }, loginUser }) {
 		if (isAuthenticated) {
 			history.push("/");
 		}
-
-		if (error === "Invalid credentials") {
+		console.log("error :>> ", error);
+		if (
+			error === "Please enter a valid email" ||
+			error === "User not registered" ||
+			error === "Invalid credentials"
+		) {
 			M.toast({ html: error });
 		}
 	}, [history, isAuthenticated, error]);
@@ -56,6 +60,7 @@ function Login({ initialState: { isAuthenticated, error }, loginUser }) {
 							name="email"
 							value={email}
 							onChange={onChange}
+							required
 						/>
 						<label htmlFor="email">Email</label>
 					</div>
@@ -69,6 +74,7 @@ function Login({ initialState: { isAuthenticated, error }, loginUser }) {
 							name="password"
 							value={password}
 							onChange={onChange}
+							required
 						/>
 						<label htmlFor="password">Password</label>
 					</div>

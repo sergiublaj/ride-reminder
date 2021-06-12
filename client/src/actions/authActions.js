@@ -6,6 +6,8 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	LOGOUT,
+	REGISTER_FAIL,
+	REGISTER_SUCCESS,
 } from "../actions/types";
 
 // eslint-disable-next-line
@@ -50,6 +52,32 @@ export const loginUser = (formData) => async (dispatch) => {
 		dispatch({
 			type: LOGIN_FAIL,
 			payload: error.response.data.msg,
+		});
+	}
+};
+
+// eslint-disable-next-line
+export const registerUser = (formData) => async (dispatch) => {
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	try {
+		const res = await axios.post("/api/users", formData, config);
+		const data = await res.data;
+
+		dispatch({
+			type: REGISTER_SUCCESS,
+			payload: data,
+		});
+
+		dispatch(loadUser());
+	} catch (error) {
+		dispatch({
+			type: REGISTER_FAIL,
+			payload: error,
 		});
 	}
 };

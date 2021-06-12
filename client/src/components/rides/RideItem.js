@@ -14,14 +14,8 @@ function RideItem({ ride, id, setCurrent }) {
 			</span>
 			<br />
 			<span>
-				From{" "}
-				<span style={{ color: "purple" }}>
-					{start.charAt(0).toUpperCase() + start.substring(1)}
-				</span>{" "}
-				to{" "}
-				<span style={{ color: "brown" }}>
-					{end.charAt(0).toUpperCase() + end.substring(1)}
-				</span>
+				From <span style={{ color: "purple" }}>{start}</span> to{" "}
+				<span style={{ color: "brown" }}>{end}</span>
 			</span>
 			<br />
 			<span>

@@ -12,8 +12,8 @@ app.use(express.json({ extended: false }));
 app.get("/", (req, res) => res.json({ msg: "Welcome to Ride Reminder API!" }));
 
 // Define routes
-app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/users", require("./routes/users"));
 app.use("/api/rides", require("./routes/rides"));
 
 const PORT = process.env.PORT || 5000;
