@@ -28,6 +28,11 @@ function Navbar({ initialState: { user, isAuthenticated }, logoutUser }) {
 				<Link to="/about">About</Link>
 			</li>
 			<li>
+				<Link to="/notifications">
+					<i className="material-icons">notifications_none</i>
+				</Link>
+			</li>
+			<li>
 				<a href="/login" onClick={() => logoutUser()}>
 					<i className="material-icons">logout</i>
 				</a>

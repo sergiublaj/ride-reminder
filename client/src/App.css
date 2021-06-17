@@ -419,6 +419,10 @@ table th {
 	max-width: 600px;
 }
 
+#mark-read:hover {
+	cursor: pointer;
+}
+
 .swap-routes {
 	margin-top: 30px;
 }

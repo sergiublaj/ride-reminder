@@ -9,7 +9,7 @@ function RideItem({ ride, id, setCurrent }) {
 	return (
 		<div className="card">
 			<i className={"fas fa-biking fa-2x"} />{" "}
-			<span style={{ fontSize: 23 }}>
+			<span className="card-title">
 				Route #<span style={{ color: "red" }}>{id}</span>
 			</span>
 			<br />

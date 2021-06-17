@@ -10,6 +10,7 @@ import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
 import About from "./components/pages/About";
+import Notifications from "./components/pages/Notifications";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
@@ -27,6 +28,11 @@ function App({ loadUser }) {
 				<div className={"container"}>
 					<Switch>
 						<PrivateRoute exact path="/" component={Home} />
+						<PrivateRoute
+							exact
+							path="/notifications"
+							component={Notifications}
+						/>
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/about" component={About} />
