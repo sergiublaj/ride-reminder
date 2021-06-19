@@ -2,16 +2,17 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import NotificationItem from "./NotificationItem";
 
-function NotificationList() {
-	const list = [
-		{ title: "notification 1", message: "message 1" },
-		{ title: "notification 2", message: "message 2" },
-	];
-
+function NotificationList({ initialState: { rides } }) {
 	return (
 		<Fragment>
-			{list.length ? (
-				list.map((item, index) => <NotificationItem key={index} item={item} />)
+			{rides.length ? (
+				rides.map((ride) => (
+					<NotificationItem
+						key={ride.id}
+						title={"Missed ride"}
+						message={`From ${ride.start} to ${ride.end}`}
+					/>
+				))
 			) : (
 				<h4>No notifications</h4>
 			)}
