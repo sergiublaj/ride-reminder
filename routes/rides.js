@@ -29,6 +29,7 @@ router.post(
 			body("start", "Start location is required").notEmpty(),
 			body("end", "End location is required").notEmpty(),
 			body("distance", "Distance is required").notEmpty(),
+			body("schedule", "Date is required").notEmpty(),
 		],
 	],
 	async (req, res) => {
@@ -37,14 +38,15 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { start, end, distance } = req.body;
+		const { start, end, distance, schedule } = req.body;
 
 		try {
 			const newRide = new Ride({
 				start: start.charAt(0).toUpperCase() + start.substring(1),
 				end: end.charAt(0).toUpperCase() + end.substring(1),
 				distance,
-				date: new Date(),
+				issued: new Date(),
+				schedule,
 				user: req.user.id,
 			});
 
@@ -62,13 +64,14 @@ router.post(
 // @desc    Update ride
 // @access  Private (token required)
 router.put("/:id", auth, async (req, res) => {
-	const { start, end, distance } = req.body;
+	const { start, end, distance, schedule } = req.body;
 
 	const rideFields = {};
 	if (start)
 		rideFields.start = start.charAt(0).toUpperCase() + start.substring(1);
 	if (end) rideFields.end = end.charAt(0).toUpperCase() + end.substring(1);
 	if (distance) rideFields.distance = distance;
+	if (schedule) rideFields.schedule = schedule;
 
 	try {
 		let ride = await Ride.findById(req.params.id);

@@ -8,16 +8,20 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 		start: "",
 		end: "",
 		distance: "",
+		schedule: "",
 	});
 
 	useEffect(() => {
 		if (current) {
-			setRide(current);
+			setRide({
+				...current,
+				schedule: new Date(current.schedule).toISOString().slice(0, 10),
+			});
 		}
 		M.updateTextFields();
 	}, [current]);
 
-	const { start, end, distance } = ride;
+	const { start, end, distance, schedule } = ride;
 
 	const swapLocations = () => {
 		const [start, end] = [ride.end, ride.start];
@@ -30,6 +34,7 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 			end,
 		});
 		M.toast({ html: "Locations swapped!" });
+		console.log("ride :>> ", ride);
 	};
 
 	const onChange = (event) => {
@@ -42,7 +47,7 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		if (start === "" || end === "" || distance === "") {
+		if (start === "" || end === "" || distance === "" || schedule === "") {
 			M.toast({ html: "Please fill in all the fields!" });
 		} else {
 			updateRide(ride);
@@ -110,6 +115,20 @@ function EditRideModal({ initialState: { current }, updateRide }) {
 									onChange={onChange}
 								/>
 								<label htmlFor="distance">Distance </label>
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="input-field col s12">
+								<i className="material-icons prefix">date_range</i>
+								<input
+									type="date"
+									id="date"
+									name="schedule"
+									value={schedule}
+									onChange={onChange}
+								></input>
+								<label htmlFor="date">Date </label>
 							</div>
 						</div>
 

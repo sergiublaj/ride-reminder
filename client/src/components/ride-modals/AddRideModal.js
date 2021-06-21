@@ -8,8 +8,10 @@ function AddRideModal({ addRide }) {
 		start: "",
 		end: "",
 		distance: "",
+		issue: "",
+		schedule: "",
 	});
-	const { start, end, distance } = ride;
+	const { start, end, distance, schedule } = ride;
 
 	const swapLocations = () => {
 		const [start, end] = [ride.end, ride.start];
@@ -34,7 +36,7 @@ function AddRideModal({ addRide }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		if (start === "" || end === "" || distance === "") {
+		if (start === "" || end === "" || distance === "" || schedule === "") {
 			M.toast({ html: "Please fill in all the fields!" });
 		} else {
 			addRide(ride);
@@ -45,7 +47,8 @@ function AddRideModal({ addRide }) {
 				start: "",
 				end: "",
 				distance: "",
-				date: new Date(),
+				issue: "",
+				schedule: "",
 			});
 		}
 	};
@@ -107,6 +110,20 @@ function AddRideModal({ addRide }) {
 									onChange={onChange}
 								/>
 								<label htmlFor="distance">Distance </label>
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="input-field col s12">
+								<i className="material-icons prefix">date_range</i>
+								<input
+									type="date"
+									id="date"
+									name="schedule"
+									value={schedule}
+									onChange={onChange}
+								/>
+								<label htmlFor="date">Date </label>
 							</div>
 						</div>
 

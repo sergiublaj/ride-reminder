@@ -4,7 +4,7 @@ import { setCurrent } from "../../actions/rideActions";
 import { connect } from "react-redux";
 
 function RideItem({ ride, id, setCurrent }) {
-	const { start, end, distance, date } = ride;
+	const { start, end, distance, issue, schedule } = ride;
 
 	return (
 		<div className="card">
@@ -27,7 +27,15 @@ function RideItem({ ride, id, setCurrent }) {
 				Date added:{" "}
 				<span style={{ color: "grey" }}>
 					{" "}
-					<Moment format="Do MMMM YYYY, HH:mm:ss">{date}</Moment>
+					<Moment format="Do MMMM YYYY">{issue}</Moment>
+				</span>
+			</span>
+			<br />
+			<span>
+				Scheduled for:{" "}
+				<span style={{ color: "grey" }}>
+					{" "}
+					<Moment format="Do MMMM YYYY">{schedule}</Moment>
 				</span>
 			</span>
 			<a

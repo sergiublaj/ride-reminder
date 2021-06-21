@@ -17,6 +17,10 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	distance: {
+		type: Number,
+		default: 0,
+	},
 });
 
 module.exports = mongoose.model("user", UserSchema);

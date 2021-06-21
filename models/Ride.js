@@ -17,9 +17,13 @@ const RideSchema = mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	date: {
+	issue: {
 		type: Date,
 		default: new Date(),
+	},
+	schedule: {
+		type: Date,
+		required: true,
 	},
 });
 

@@ -4,7 +4,7 @@ import NotificationList from "../notifications/NotificationList";
 function Notifications() {
 	return (
 		<Fragment>
-			<h5>Your notifications here</h5>
+			<h4 className="center-align">Your notifications here</h4>
 			<NotificationList />
 		</Fragment>
 	);
