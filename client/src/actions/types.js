@@ -5,6 +5,8 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
+export const UPDATE_DISTANCE = "UPDATE_DISTANCE";
+export const DISTANCE_FAIL = "DISTANCE_FAIL";
 
 export const GET_RIDES = "GET_RIDES";
 export const ADD_RIDE = "ADD_RIDE";

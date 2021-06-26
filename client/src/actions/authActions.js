@@ -8,6 +8,8 @@ import {
 	LOGOUT,
 	REGISTER_FAIL,
 	REGISTER_SUCCESS,
+	UPDATE_DISTANCE,
+	DISTANCE_FAIL,
 } from "../actions/types";
 
 // eslint-disable-next-line
@@ -77,6 +79,34 @@ export const registerUser = (formData) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: REGISTER_FAIL,
+			payload: error,
+		});
+	}
+};
+
+// eslint-disable-next-line
+export const updateDistance = (user, distance) => async (dispatch) => {
+	const config = {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	try {
+		const updatedUser = {
+			distance,
+		};
+
+		const res = await axios.put(`/api/auth/${user}`, updatedUser, config);
+		const data = res.data;
+
+		dispatch({
+			type: UPDATE_DISTANCE,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: DISTANCE_FAIL,
 			payload: error,
 		});
 	}

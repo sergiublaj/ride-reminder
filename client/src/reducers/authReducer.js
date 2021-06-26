@@ -6,6 +6,8 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	LOGOUT,
+	DISTANCE_FAIL,
+	UPDATE_DISTANCE,
 } from "../actions/types";
 
 const initialState = {
@@ -20,6 +22,7 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case USER_LOADED:
+		case UPDATE_DISTANCE:
 			return {
 				...state,
 				isAuthenticated: true,
@@ -29,6 +32,7 @@ export default (state = initialState, action) => {
 		case AUTH_ERROR:
 		case LOGIN_FAIL:
 		case REGISTER_FAIL:
+		case DISTANCE_FAIL:
 		case LOGOUT:
 			localStorage.removeItem("token");
 			return {

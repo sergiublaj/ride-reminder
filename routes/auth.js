@@ -21,7 +21,7 @@ router.get("/", auth, async (req, res) => {
 	}
 });
 
-// @rout    POST api/auth
+// @route    POST api/auth
 // @desc    Auth user & get token
 // @access  Public (no token required)
 router.post(
@@ -77,5 +77,39 @@ router.post(
 		}
 	}
 );
+
+// @route	API/AUTH
+// @desc		Update user's distance
+// @access	Private (token required)
+router.put("/:id", auth, async (req, res) => {
+	const { name, email, age, distance } = req.body;
+
+	const userFields = {};
+	if (name) userFields.name = name;
+	if (email) userFields.email = email;
+	if (age) userFields.age = age;
+	if (distance) userFields.distance = distance;
+
+	try {
+		let user = await User.findById(req.params.id);
+
+		if (!user) {
+			return res.status(404).json({ msg: "User not found" });
+		}
+
+		userFields.distance += user.distance;
+
+		user = await User.findByIdAndUpdate(
+			req.params.id,
+			{ $set: userFields },
+			{ new: true }
+		);
+
+		res.json(user);
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send("Server error");
+	}
+});
 
 module.exports = router;

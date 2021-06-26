@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PersonalInfo from "../layout/PersonalInfo";
 import Weather from "../layout/Weather";
 import RideList from "../rides/RideList";
 import AddRideButton from "../layout/AddRideButton";
@@ -16,7 +17,10 @@ function Home() {
 
 	return (
 		<Fragment>
-			<Weather />
+			<div className="grid-2">
+				<PersonalInfo />
+				<Weather />
+			</div>
 			<RideList />
 			<AddRideButton />
 			<AddRideModal />

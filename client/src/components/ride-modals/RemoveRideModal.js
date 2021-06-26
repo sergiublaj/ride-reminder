@@ -2,14 +2,19 @@ import React from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { connect } from "react-redux";
 import { clearCurrent, deleteRide } from "../../actions/rideActions";
+import { updateDistance } from "../../actions/authActions";
 
 function RemoveRideModal({
-	initialState: { current },
+	rideState: { current },
+	authState: { user },
 	deleteRide,
 	clearCurrent,
+	updateDistance,
 }) {
 	const removeRide = () => {
 		deleteRide(current._id);
+		updateDistance(user._id, current.distance);
+
 		clearCurrent();
 		M.toast({ html: "Ride removed" });
 	};
@@ -37,9 +42,12 @@ function RemoveRideModal({
 }
 
 const mapStateToProps = (state) => ({
-	initialState: state.ride,
+	rideState: state.ride,
+	authState: state.auth,
 });
 
-export default connect(mapStateToProps, { deleteRide, clearCurrent })(
-	RemoveRideModal
-);
+export default connect(mapStateToProps, {
+	deleteRide,
+	clearCurrent,
+	updateDistance,
+})(RemoveRideModal);

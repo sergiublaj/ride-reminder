@@ -1,7 +1,7 @@
 import React from "react";
 
 function Weather() {
-	return <div></div>;
+	return <div className="card bg-dark">Weather</div>;
 }
 
 export default Weather;
